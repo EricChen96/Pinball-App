@@ -10,17 +10,13 @@ var _target_angle: float = 0.0
 
 @onready var body: AnimatableBody2D = $AnimatableBody2D
 
-func _ready() -> void:
-	_current_angle = rest_angle if is_left else -rest_angle
-	_target_angle = _current_angle
-	body.rotation = deg_to_rad(_current_angle)
 
 func _physics_process(delta: float) -> void:
 	var action = "flip_left" if is_left else "flip_right"
 	if Input.is_action_pressed(action):
-		_target_angle = flip_angle if is_left else -flip_angle
+		_target_angle = flip_angle
 	else:
-		_target_angle = rest_angle if is_left else -rest_angle
+		_target_angle = rest_angle
 
 	_current_angle = lerp(_current_angle, _target_angle, flip_speed * delta)
 	body.rotation = deg_to_rad(_current_angle)
