@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dbop4s1yref61"]
+
+[ext_resource type="Script" uid="uid://de3jpss66xjfh" path="res://addons/curved_lines_2d/scalable_vector_shape_2d.gd" id="1_gsp64"]
+[ext_resource type="Script" uid="uid://dlbv4pit17dnu" path="res://addons/curved_lines_2d/scalable_arc.gd" id="2_57nvi"]
+[ext_resource type="Script" uid="uid://dl1t88tthmwts" path="res://addons/curved_lines_2d/scalable_arc_list.gd" id="3_ojvnw"]
+
+[sub_resource type="Curve2D" id="Curve2D_o6xl0"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -736, -928, 0, 0, 0, 0, 736, -928, 0, 0, 0, 0, 736, 928, 0, 0, 0, 0, -736, 928, 0, 0, 0, 0, -736, -928)
+}
+point_count = 5
+
+[sub_resource type="Resource" id="Resource_tipki"]
+resource_local_to_scene = true
+script = ExtResource("3_ojvnw")
+
+[sub_resource type="Curve2D" id="Curve2D_85g3d"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -544, -832, 0, 0, 0, 0, 544, -832, 0, 0, 0, 0, 544, 832, 0, 0, 0, 0, -544, 832, 0, 0, 0, 0, -544, -832)
+}
+point_count = 5
+
+[sub_resource type="Resource" id="Resource_choun"]
+resource_local_to_scene = true
+script = ExtResource("3_ojvnw")
+
+[node name="Game Container" type="Node2D" unique_id=831355183]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=332815583]
+position = Vector2(736, 928)
+metadata/_edit_lock_ = true
+
+[node name="Game Container" type="Node2D" parent="StaticBody2D" unique_id=1965964842 node_paths=PackedStringArray("polygon", "collision_object", "clip_paths")]
+script = ExtResource("1_gsp64")
+polygon = NodePath("Fill")
+collision_object = NodePath("..")
+curve = SubResource("Curve2D_o6xl0")
+update_curve_at_runtime = true
+arc_list = SubResource("Resource_tipki")
+clip_paths = [NodePath("CutoutOfRectangle")]
+shape_type = 1
+size = Vector2(1472, 1856)
+metadata/_select_hint_ = true
+
+[node name="Fill" type="Polygon2D" parent="StaticBody2D/Game Container" unique_id=1260004160]
+polygon = PackedVector2Array(0, -864, -544, -864, -544, 800, 0, 800, 0, 928, -736, 928, -736, -928, 0, -928, 736, 928, 0, 928, 0, 800, 544, 800, 544, -864, 0, -864, 0, -928, 736, -928)
+polygons = [[0, 1, 2, 3, 4, 5, 6, 7], [8, 9, 10, 11, 12, 13, 14, 15]]
+metadata/_edit_lock_ = true
+
+[node name="CutoutOfRectangle" type="Node2D" parent="StaticBody2D/Game Container" unique_id=651325637]
+position = Vector2(0, -32)
+script = ExtResource("1_gsp64")
+curve = SubResource("Curve2D_85g3d")
+update_curve_at_runtime = true
+arc_list = SubResource("Resource_choun")
+shape_type = 1
+size = Vector2(1088, 1664)
+metadata/_select_hint_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1272021486]
+polygon = PackedVector2Array(0, -864, -544, -864, -544, 800, 0, 800, 0, 928, -736, 928, -736, -928, 0, -928)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=102405205]
+polygon = PackedVector2Array(736, 928, 0, 928, 0, 800, 544, 800, 544, -864, 0, -864, 0, -928, 736, -928)
+metadata/_edit_lock_ = true
